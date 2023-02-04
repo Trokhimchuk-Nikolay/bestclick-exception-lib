@@ -1,0 +1,9 @@
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+
+spring:
+  messages:
+    encoding: UTF-8
+    basename: messages/api_error, messages/config_error
