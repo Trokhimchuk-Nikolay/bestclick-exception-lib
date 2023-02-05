@@ -3,8 +3,9 @@ package ru.bestclick.exceptionlib.helper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Component;
+import ru.bestclick.exceptionlib.config.ThreadLocalStorage;
 
 import java.util.Locale;
 
@@ -14,18 +15,18 @@ import static ru.bestclick.exceptionlib.constant.ExceptionConstants.GETTING_MESS
 @Component
 @RequiredArgsConstructor
 public class MessageHelper {
-    private static MessageSource source;
+    private static MessageSourceAccessor messageSourceAccessor;
 
     @Autowired
-    public void setMessageSourceAccessor(MessageSource messageSource) {
-        source = messageSource;
+    public void setMessageSourceAccessor(MessageSourceAccessor messageSourceAccessor) {
+        MessageHelper.messageSourceAccessor = messageSourceAccessor;
     }
 
     public static String getMessage(String code, Object[] args, Locale locale) {
         try {
-            return source.getMessage(code, args, locale);
+            return messageSourceAccessor.getMessage(code, args, locale);
         } catch (Exception ex) {
-            log.error("Error getting message from resources: {}", ex.getMessage());
+            log.error("Error getting message from resources: {}. code: {}, locale: {}", ex.getMessage(), code, locale);
             return GETTING_MESSAGE_FROM_RESOURCES_ERROR_MSG;
         }
     }
@@ -35,7 +36,7 @@ public class MessageHelper {
     }
 
     public static String getMessage(String code) {
-        return getMessage(code, null, Locale.ROOT);
+        return getMessage(code, null, ThreadLocalStorage.locale.get());
     }
 
     public static String getMessageWithLocale(String code, Locale locale) {

@@ -15,7 +15,6 @@ import static ru.bestclick.exceptionlib.constant.ExceptionConstants.UNKNOWN_SERV
 @EqualsAndHashCode(callSuper = true)
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class BusinessException extends RuntimeException {
-
     @Serial
     static final long serialVersionUID = -3332598979055089070L;
     private String code;
@@ -23,24 +22,21 @@ public class BusinessException extends RuntimeException {
     private String[] details;
 
     public BusinessException(String code, OffsetDateTime createDate, String[] details) {
-        super(MessageHelper.getMessage(code));
+        super(MessageHelper.getMessage(code, details));
         this.code = code;
         this.createDate = createDate;
-        this.details = details;
     }
 
     public BusinessException(String code, String[] details) {
-        super(MessageHelper.getMessage(code));
+        super(MessageHelper.getMessage(code, details));
         this.code = code;
         this.createDate = OffsetDateTime.now();
-        this.details = details;
     }
 
     public BusinessException(String code) {
         super(MessageHelper.getMessage(code));
         this.code = code;
         this.createDate = OffsetDateTime.now();
-        this.details = null;
     }
 
     public BusinessException() {

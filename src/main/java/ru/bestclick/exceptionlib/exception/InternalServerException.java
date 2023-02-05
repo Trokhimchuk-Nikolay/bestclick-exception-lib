@@ -15,9 +15,9 @@ import static ru.bestclick.exceptionlib.constant.ExceptionConstants.UNKNOWN_SERV
 @EqualsAndHashCode(callSuper = true)
 @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 public class InternalServerException extends RuntimeException {
-
     @Serial
     static final long serialVersionUID = -6572598947855086802L;
+
     private String code;
     private OffsetDateTime createDate;
     private String[] details;

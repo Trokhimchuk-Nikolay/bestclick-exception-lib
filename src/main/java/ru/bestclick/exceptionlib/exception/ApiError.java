@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 
 @Data
@@ -15,11 +17,16 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder(value = {"code", "message", "details", "createDate"})
-public class ApiError {
+public class ApiError implements Serializable {
+    @Serial
+    static final long serialVersionUID = -1142598979055089070L;
+
+    @Builder.Default
+    private OffsetDateTime createDate = OffsetDateTime.now();
+
     private String code;
     private String message;
     private String[] details;
 
-    @Builder.Default
-    private OffsetDateTime createDate = OffsetDateTime.now();
+
 }
