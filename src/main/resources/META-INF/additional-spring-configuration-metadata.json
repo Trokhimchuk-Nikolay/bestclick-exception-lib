@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "bestclick.logging.exception.business",
+      "type": "java.lang.String",
+      "description": "Enable business error logging."
+    },
+    {
+      "name": "bestclick.logging.exception.server",
+      "type": "java.lang.String",
+      "description": "Enable server error logging."
+    }
+  ]
+}

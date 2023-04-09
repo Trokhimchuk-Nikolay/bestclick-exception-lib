@@ -10,36 +10,45 @@ import ru.bestclick.exceptionlib.util.MessageUtils;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class BusinessException extends RuntimeException {
+
+public class ServerException extends RuntimeException {
 
   @Serial
-  static final long serialVersionUID = -3332598979055089070L;
+  static final long serialVersionUID = -6572598947855086802L;
 
   private final String code;
   private final OffsetDateTime createDate;
   private String[] details;
 
-  public BusinessException(String code, OffsetDateTime createDate, String[] details) {
-    super(MessageUtils.getMessage(code, details));
+  public ServerException(String code, OffsetDateTime createDate, String[] details) {
+    super(MessageUtils.getMessage(code));
     this.code = code;
     this.createDate = createDate;
+    this.details = details;
   }
 
-  public BusinessException(String code, String[] details) {
-    super(MessageUtils.getMessage(code, details));
+  public ServerException(String code, String[] details) {
+    super(MessageUtils.getMessage(code));
     this.code = code;
     this.createDate = OffsetDateTime.now();
+    this.details = details;
   }
 
-  public BusinessException(String code) {
+  public ServerException(String code) {
     super(MessageUtils.getMessage(code));
     this.code = code;
     this.createDate = OffsetDateTime.now();
   }
 
-  public BusinessException() {
+  public ServerException() {
     super(MessageUtils.getMessage(UNKNOWN_SERVICE_ERROR_CODE));
     this.code = UNKNOWN_SERVICE_ERROR_CODE;
+    this.createDate = OffsetDateTime.now();
+  }
+
+  public ServerException(String code, String message) {
+    super(message);
+    this.code = code;
     this.createDate = OffsetDateTime.now();
   }
 }

@@ -7,15 +7,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.MessageSourceAccessor;
-import ru.bestclick.exceptionlib.helper.MessageHelper;
+import ru.bestclick.exceptionlib.util.MessageUtils;
 
 @Configuration
 @RequiredArgsConstructor
-@Import({MessageHelper.class})
+@Import({MessageUtils.class})
 public class MessageSourceConfig {
-    @Bean
-    @ConditionalOnMissingBean(MessageSourceAccessor.class)
-    MessageSourceAccessor messageSourceAccessor(MessageSource messageSource) {
-        return new MessageSourceAccessor(messageSource);
-    }
+
+  @Bean
+  @ConditionalOnMissingBean(MessageSourceAccessor.class)
+  MessageSourceAccessor messageSourceAccessor(MessageSource messageSource) {
+    return new MessageSourceAccessor(messageSource);
+  }
 }

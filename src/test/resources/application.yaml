@@ -9,3 +9,9 @@ spring:
       read-date-timestamps-as-nanoseconds: false
     serialization:
       write-dates-as-timestamps: false
+
+bestclick:
+  logging:
+    exception:
+      business: true
+      server: true
