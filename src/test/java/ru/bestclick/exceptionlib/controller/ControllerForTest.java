@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.bestclick.exceptionlib.exception.ApiError;
+import ru.bestclick.exceptionlib.model.ApiError;
 import ru.bestclick.exceptionlib.exception.BusinessException;
 import ru.bestclick.exceptionlib.exception.ServerException;
 

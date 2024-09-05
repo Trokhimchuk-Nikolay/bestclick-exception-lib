@@ -4,7 +4,6 @@ import lombok.experimental.UtilityClass;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-//TODO Перенести в общую либу
 @UtilityClass
 public class MarkerConstants {
 
@@ -14,4 +13,5 @@ public class MarkerConstants {
   public static final Marker REPOSITORY_MARKER = MarkerFactory.getMarker("REPOSITORY_MARKER");
   public static final Marker HANDLER_MARKER = MarkerFactory.getMarker("HANDLER_MARKER");
   public static final Marker SECURITY_MARKER = MarkerFactory.getMarker("SECURITY_MARKER");
+  public static final Marker LIB_MARKER = MarkerFactory.getMarker("LIB_MARKER");
 }

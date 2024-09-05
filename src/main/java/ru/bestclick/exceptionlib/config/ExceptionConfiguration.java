@@ -1,7 +1,7 @@
 package ru.bestclick.exceptionlib.config;
 
-import static ru.bestclick.exceptionlib.constant.Constants.SERVLET_HANDLING_ENABLED_MSG;
-import static ru.bestclick.exceptionlib.constant.ExceptionConstants.REACTOR_NOT_FOUND_CODE;
+import static ru.bestclick.exceptionlib.constant.ExceptionCodeConstants.REACTOR_NOT_FOUND_CODE;
+import static ru.bestclick.exceptionlib.constant.ExceptionMessageConstants.SERVLET_HANDLING_ENABLED_MSG;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import ru.bestclick.exceptionlib.exception.ServerException;
-import ru.bestclick.exceptionlib.exception.handler.BusinessExceptionHandler;
+import ru.bestclick.exceptionlib.handler.BusinessExceptionHandler;
 import ru.bestclick.exceptionlib.properties.BestclickExceptionProperties;
 
 @Slf4j
@@ -18,7 +18,8 @@ import ru.bestclick.exceptionlib.properties.BestclickExceptionProperties;
 @Import({
     ExceptionConfiguration.ServletConfiguration.class,
     ExceptionConfiguration.ReactiveConfiguration.class,
-    MessageSourceConfig.class
+    MessageSourceConfig.class,
+    BestclickExceptionProperties.class
 })
 public class ExceptionConfiguration {
 

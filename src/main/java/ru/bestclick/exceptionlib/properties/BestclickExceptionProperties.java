@@ -1,17 +1,14 @@
 package ru.bestclick.exceptionlib.properties;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 @Data
-@Component
-@AllArgsConstructor
-@NoArgsConstructor
-@ConfigurationProperties(prefix = "bestclick")
+@Configuration
+@ConfigurationProperties(prefix = "bestclick.exception")
 public class BestclickExceptionProperties {
 
-  private BestclickExceptionLog logging;
+  boolean enable;
+
 }

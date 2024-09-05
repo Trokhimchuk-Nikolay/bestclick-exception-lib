@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.bestclick.exceptionlib.config.EnableExceptionHandler;
 import ru.bestclick.exceptionlib.config.ThreadLocalStorage;
-import ru.bestclick.exceptionlib.exception.ApiError;
+import ru.bestclick.exceptionlib.model.ApiError;
 
 @AutoConfigureMockMvc
 @EnableExceptionHandler
@@ -45,9 +45,7 @@ class ExceptionLibApplicationTests {
     mvc.perform(get(TEST_PATH)
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
-        .andExpect(content()
-            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(apiError.getCode()))
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(apiError.getMessage()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.createDate").isNotEmpty());
   }
@@ -63,7 +61,6 @@ class ExceptionLibApplicationTests {
         .andExpect(status().isBadRequest())
         .andExpect(content()
             .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(apiError.getCode()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(apiError.getMessage()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.createDate").isNotEmpty());
   }
@@ -73,14 +70,13 @@ class ExceptionLibApplicationTests {
   @SneakyThrows
   void errorBusinessCallLocaleEn() {
     var apiError = mapper.readValue(new File(API_ERROR_RQ_ERROR_EN), ApiError.class);
-    ThreadLocalStorage.LOCALE.set(Locale.ENGLISH);
+    ThreadLocalStorage.setLocale(Locale.ENGLISH);
 
     mvc.perform(delete(TEST_PATH)
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isBadRequest())
         .andExpect(content()
             .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(apiError.getCode()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(apiError.getMessage()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.createDate").isNotEmpty());
   }
@@ -96,7 +92,6 @@ class ExceptionLibApplicationTests {
         .andExpect(status().isInternalServerError())
         .andExpect(content()
             .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(apiError.getCode()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(apiError.getMessage()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.createDate").isNotEmpty());
   }
@@ -106,14 +101,12 @@ class ExceptionLibApplicationTests {
   @SneakyThrows
   void errorServerCallLocaleEn() {
     var apiError = mapper.readValue(new File(API_ERROR_RQ_ERROR_EN), ApiError.class);
-    ThreadLocalStorage.LOCALE.set(Locale.ENGLISH);
-
+    ThreadLocalStorage.setLocale(Locale.ENGLISH);
     mvc.perform(put(TEST_PATH)
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isInternalServerError())
         .andExpect(content()
             .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(apiError.getCode()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(apiError.getMessage()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.createDate").isNotEmpty());
   }

@@ -11,7 +11,5 @@ spring:
       write-dates-as-timestamps: false
 
 bestclick:
-  logging:
-    exception:
-      business: true
-      server: true
+  exception:
+    enable: true
